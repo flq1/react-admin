@@ -3,7 +3,21 @@ import { Form, Icon, Input, Button  } from 'antd';
 import log from './logo.png'
 import './index.less'
   class Login extends Component{
-     
+     handleConfirmPassword = (rule, value, callback) => {
+         console.log(/^\w+$/.test(value),value)
+         const str = rule.field === "username" ? '用户名' : '密码'
+        if(!value){
+           callback(`请输入${str}`)
+        }else if(!/^\w+$/.test(value)){
+              callback(`请输入正确的格式英文、字母、下划线`)
+        }else if(value.length < 5){
+            callback(`${str}长度不能小于5`)
+        } else if (value.length > 15) {
+            callback(`${str}长度不能大于15`)
+        }
+        
+         callback()
+     }
     render (){
          const { getFieldDecorator } = this.props.form;
      return <div  className="log">
@@ -16,7 +30,11 @@ import './index.less'
              <Form onSubmit={this.handleSubmit}  className="log-body-from login-form">
                 <Form.Item>
                     {getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                        rules: [
+                         {
+                            validator: this.handleConfirmPassword
+                        }],
+                       
                     })(
                         <Input
                         prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -26,7 +44,9 @@ import './index.less'
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
+                       rules: [{
+                           validator: this.handleConfirmPassword
+                       }],
                     })(
                         <Input
                         prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
