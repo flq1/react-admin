@@ -7,7 +7,6 @@ export default class App extends Component{
         return (
           <div>
             <Router>
-              
               <Route path="/" exact component={Login}></Route>
               <Route path="/home" exact component={Home}></Route>
             </Router>
