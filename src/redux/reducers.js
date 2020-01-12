@@ -1,8 +1,5 @@
 import { combineReducers } from "redux"
 
-
-
-
 function aaa (prevState=2,action){
     switch(action.type){
         default:

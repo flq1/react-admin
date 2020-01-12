@@ -1,8 +1,7 @@
-import React from 'react' 
+import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
+import Store from './redux/store'
 import App from './App'
-import Store from '../src/redux/store'
-ReactDOM.render(<Provider store={Store} >
-    <App/>
-</Provider>,document.getElementById('root'))
+import './index.less'
+ReactDOM.render(<Provider store={Store} ><App/></Provider>,document.getElementById('root'))
