@@ -62,4 +62,4 @@ import './index.less'
     }
 } 
 const WrappedNormalLoginForm = Form.create()(Login);
-export default WrappedNormalLoginForm
+export default WrappedNormalLoginForm 
