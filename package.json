@@ -8,6 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "antd": "^3.26.6",
+    "axios": "^0.19.1",
     "babel-plugin-import": "^1.13.0",
     "customize-cra": "^0.9.1",
     "less": "^3.10.3",
@@ -42,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://47.103.203.152"
 }
