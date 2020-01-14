@@ -26,7 +26,7 @@ class Login extends Component {
     } = this.props;
     validateFields((errors, values) => {
       const { username, password } = values;
-
+      console.log(errors);
       if (errors === null) {
         reqlogin(username, password)
           .then(value => {
