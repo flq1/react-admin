@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, message } from "antd";
-import log from "./logo.png";
+import log from "../../assce/logo.png";
 import "./index.less";
-import { reqlogin } from "../../api/index";
+import { connect } from "react-redux";
+import { saveUserAsync } from "../../redux/actions";
+import withchecklogin from "../with-check-login";
+@withchecklogin
+@connect(null, { saveUserAsync })
+@Form.create()
 class Login extends Component {
   handleConfirmPassword = (rule, value, callback) => {
     const str = rule.field === "username" ? "用户名" : "密码";
@@ -26,15 +31,16 @@ class Login extends Component {
     } = this.props;
     validateFields((errors, values) => {
       const { username, password } = values;
-      console.log(errors);
+
       if (errors === null) {
-        reqlogin(username, password)
-          .then(value => {
+        this.props
+          .saveUserAsync(username, password)
+          .then(() => {
             this.props.history.replace("/home");
           })
-          .catch(e => {
-            message.error(e);
-            this.props.form.resetFields(["passwrod"]);
+          .catch(msg => {
+            message.error(msg);
+            this.props.form.resetFields(["password"]);
           });
       }
     });
@@ -100,5 +106,5 @@ class Login extends Component {
     );
   }
 }
-const WrappedNormalLoginForm = Form.create()(Login);
-export default WrappedNormalLoginForm;
+
+export default Login;

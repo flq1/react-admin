@@ -1,12 +1,18 @@
 import { combineReducers } from "redux";
+import { SAVE_USER } from "./actiontype";
+import { getItem } from "../utils/storage";
 
-function aaa(prevState = 2, action) {
+const initUser = getItem("user") || {};
+function user(prevState = initUser, action) {
   switch (action.type) {
+    case SAVE_USER:
+      return action.data;
     default:
       return prevState;
   }
 }
-function bbb(prevState = 2, action) {
+
+function bbb(prevState = 222, action) {
   switch (action.type) {
     default:
       return prevState;
@@ -14,6 +20,6 @@ function bbb(prevState = 2, action) {
 }
 
 export default combineReducers({
-  aaa,
+  user,
   bbb
 });

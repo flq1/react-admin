@@ -22,13 +22,12 @@ instance.interceptors.request.use(function(config) {
       .slice(1);
     config.headers["content-type"] = "application/x-www-form-urlencoded";
   }
-  console.log(config);
+
   return config;
 });
 
 instance.interceptors.response.use(
   function(response) {
-    console.log(response);
     if (response.data.status === 0) {
       return response.data.data;
     } else {
