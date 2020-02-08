@@ -1,9 +1,11 @@
 import React from "react";
 import { Layout, Breadcrumb } from "antd";
 import Layoutmeun from "./layoutmenu";
+import Layoutheader from "./layoutheader";
 import logo from "../../assce/logo.png";
 import "./less.less";
-const { Header, Content, Footer, Sider } = Layout;
+
+const { Content, Footer, Sider } = Layout;
 
 class Basiclayout extends React.Component {
   state = {
@@ -35,7 +37,7 @@ class Basiclayout extends React.Component {
           <Layoutmeun />
         </Sider>
         <Layout>
-          <Header style={{ background: "#fff", padding: 0 }} />
+          <Layoutheader />
           <Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>

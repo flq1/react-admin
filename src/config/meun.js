@@ -1,4 +1,7 @@
-const menus = [
+
+
+
+const meus = [
   {
     title: "首页",
     icon: "home",
@@ -56,4 +59,4 @@ const menus = [
 ];
 
 // 暴露
-export default menus;
+export default meus;

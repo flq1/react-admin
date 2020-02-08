@@ -1,49 +1,74 @@
 import React, { Component } from "react";
-
+import meus from "../../../config/meun";
+import { Link, withRouter } from "react-router-dom";
 import { Menu, Icon } from "antd";
 const { SubMenu } = Menu;
-export default class Layoutmeun extends Component {
+@withRouter
+class Layoutmeun extends Component {
+  createMenus = meus => {
+    return meus.map(item => {
+      if (item.children) {
+        return (
+          <SubMenu
+            key={item.path}
+            title={
+              <span>
+                <Icon type={item.icon} />
+                <span>{item.title}</span>
+              </span>
+            }
+          >
+            {item.children.map(itemchildren => {
+              return (
+                <Menu.Item key={itemchildren.path}>
+                  <Link to={itemchildren.path}>
+                    <Icon type={itemchildren.icon} />
+                    <span>{itemchildren.title}</span>
+                  </Link>
+                </Menu.Item>
+              );
+            })}
+          </SubMenu>
+        );
+      } else {
+        return (
+          <Menu.Item key={item.path}>
+            <Link to={item.path}>
+              <Icon type={item.icon} />
+              <span>{item.title}</span>
+            </Link>
+          </Menu.Item>
+        );
+      }
+    });
+  };
+  findOpenKeys = (pathname, menus) => {
+    const menu = menus.find(menu => {
+      if (menu.children) {
+        return menu.children.find(cMenu => cMenu.path === pathname);
+      }
+    });
+
+    if (menu) {
+      return menu.path;
+    }
+  };
+
   render() {
+    const { pathname } = this.props.location;
+    console.log(pathname);
+
+    const openKey = this.findOpenKeys(pathname, meus);
     return (
-      <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-        <Menu.Item key="1">
-          <Icon type="home" />
-          <span>首页</span>
-        </Menu.Item>
-        <Menu.Item key="2">
-          <Icon type="desktop" />
-          <span>Option 2</span>
-        </Menu.Item>
-        <SubMenu
-          key="sub1"
-          title={
-            <span>
-              <Icon type="user" />
-              <span>User</span>
-            </span>
-          }
-        >
-          <Menu.Item key="3">Tom</Menu.Item>
-          <Menu.Item key="4">Bill</Menu.Item>
-          <Menu.Item key="5">Alex</Menu.Item>
-        </SubMenu>
-        <SubMenu
-          key="sub2"
-          title={
-            <span>
-              <Icon type="team" />
-              <span>Team</span>
-            </span>
-          }
-        >
-          <Menu.Item key="6">Team 1</Menu.Item>
-          <Menu.Item key="8">Team 2</Menu.Item>
-        </SubMenu>
-        <Menu.Item key="9">
-          <Icon type="file" />
-          <span>File</span>
-        </Menu.Item>
+      <Menu
+        theme="dark"
+        defaultSelectedKeys={[`${pathname}`]}
+        mode="inline"
+        defaultOpenKeys={[`${openKey}`]}
+      >
+        {this.createMenus(meus)}
       </Menu>
     );
   }
 }
+export default Layoutmeun;

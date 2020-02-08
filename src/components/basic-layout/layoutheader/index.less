@@ -1,0 +1,37 @@
+.layoutheader {
+  height: 80px;
+  text-align: right;
+  .layoutheader-top {
+    height: 40px;
+    border-bottom: 1px solid seagreen;
+    line-height: 40px;
+    .layoutheader-languge {
+      margin: 0 10px 0 10px;
+    }
+  }
+  .layoutheader-bottom {
+    height: 40px;
+    line-height: 40px;
+    display: flex;
+    .layoutheader-nav {
+      flex: 1;
+      font-size: 20px;
+      font-weight: bold;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: -40px;
+        margin-left: 20px;
+        border-top: 20px solid #fff;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+      }
+    }
+    .layoutheader-item {
+      flex: 3;
+      margin-right: 20px;
+    }
+  }
+}
